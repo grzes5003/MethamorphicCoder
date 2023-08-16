@@ -1,0 +1,12 @@
+
+
+[programs]
+
+1 = {keylogger.exe, keylogger.cpp}
+2 = {NONE, keylogger2.cpp}
+3 = {keylogger3.exe, keylogger3.cpp}
+4 = {keylogger4.exe, keylogger4.cpp}
+5 = {NONE, keylogger5.cpp}
+
+6 = {keylogger6.exe, metame}
+7 = {keylogger7.exe, pymetaengine}

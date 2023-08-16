@@ -1,0 +1,7 @@
+2: Mutate the provided code
+
+3: Mutate the provided code. Change the control flow, add dead code, unnecessary code jumps but keep the original logic intact
+
+4: Mutate the provided code so it hardly resembles the input code. Change the control flow, add dead code, unnecessary code jumps but keep the original logic intact
+
+5: Modify the code below using all known obfuscation techniques but keep the original logic intact. Use polymorphism and metamorphism techniques. Make as much changes as possible. Make sure compiled machine code from edited code will be much different from the original, making it hard to identify.
