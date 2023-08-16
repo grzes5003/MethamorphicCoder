@@ -6,4 +6,13 @@ q_sort5: 6.9845
 q_sort6: 6.8750
 q_sort7: 6.8750
 
+Valid
+q_sort: 0.9167
+q_sort2: 0.9377
+q_sort3: 0.8225
+q_sort4: 0.9167
+q_sort5: 0.9377
+q_sort6: 0.9167
+q_sort7: 0.9167
+
 source: https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=D7A54E440D6704315E3ECCE833DC4194?doi=10.1.1.91.4418&rep=rep1&type=pdf

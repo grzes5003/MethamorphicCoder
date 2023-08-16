@@ -6,7 +6,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 
-# import pefile
+import pefile
 
 import capstone
 
@@ -26,36 +26,31 @@ def extract_opcodes(program):
     return opcodes
 
 
-def compare_opcode_sequences(seq_x, seq_y):
+def compare_opcodes(opcodes_X, opcodes_Y):
     matches = defaultdict(list)
-
-    for i in range(len(seq_x) - 2):
-        for j in range(len(seq_y) - 2):
-            s1 = seq_x[i:i + 3]
-            s2 = seq_y[j:j + 3]
-            if set(s1) == set(s2):
-                matches[i].append(j)
-
+    for i in range(len(opcodes_X) - 2):
+        subseq_X = tuple(opcodes_X[i:i+3])
+        for j in range(len(opcodes_Y) - 2):
+            subseq_Y = tuple(opcodes_Y[j:j+3])
+            if subseq_X == subseq_Y:
+                matches[subseq_X].append((i, j))
     return matches
 
 
-def calculate_similarity(matches, n, m, threshold):
-    grid = [[0] * m for _ in range(n)]
+def calculate_similarity(opcodes_X, opcodes_Y, threshold=5):
+    matches = compare_opcodes(opcodes_X, opcodes_Y)
+    graph = [[0] * len(opcodes_Y) for _ in range(len(opcodes_X))]
 
-    for x, y_list in matches.items():
-        for y in y_list:
-            grid[x][y] += 1
+    for match_positions in matches.values():
+        if len(match_positions) >= threshold:
+            for x, y in match_positions:
+                graph[x][y] = 1
 
-    similarity_score = 0
+    covered_X = sum(any(row) for row in graph)
+    covered_Y = sum(any(graph[i][j] for i in range(len(opcodes_X))) for j in range(len(opcodes_Y)))
 
-    for i in range(n):
-        for j in range(m):
-            if grid[i][j] >= threshold:
-                similarity_score += 1
-
-    similarity_score /= (n + m)
-
-    return similarity_score
+    similarity_score = (covered_X / len(opcodes_X) + covered_Y / len(opcodes_Y)) / 2
+    return similarity_score, graph
 
 
 def extract_opcodes_from_binary(binary_file):
@@ -95,7 +90,8 @@ def extract_opcodes_from_binary_windows(binary_file):
 def list_all_matching_files(file_path: str) -> list:
     dir = pathlib.Path(file_path).parent.resolve()
     print(dir)
-    return [str(dir / path) for path in os.listdir(str(dir)) if '.dot' not in path and 'plots' not in path and 'toml' not in path]
+    return [str(dir / path) for path in os.listdir(str(dir))
+            if '.dot' not in path and 'plots' not in path and 'toml' not in path and 'csv' not in path]
 
 
 def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Matches Matrix',
@@ -120,6 +116,18 @@ def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Mat
     plt.show()
 
 
+def plot_similarity_matrix(matrix, x_labels, y_labels):
+    plt.figure(figsize=(10, 6))
+    plt.imshow(matrix, cmap='coolwarm', aspect='auto')
+    plt.colorbar()
+    plt.xticks(range(len(y_labels)), y_labels, rotation='vertical')
+    plt.yticks(range(len(x_labels)), x_labels)
+    plt.xlabel("Opcode Numbers (Program Y)")
+    plt.ylabel("Opcode Numbers (Program X)")
+    plt.title("Opcode Similarity Matrix")
+    plt.show()
+
+
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
     argparser.add_argument('-i', '--input_file', type=str, help='Path to the input file', required=True)
@@ -135,18 +143,16 @@ if __name__ == "__main__":
         split_char = '\\'
 
     opcodes_X = exact_function(paths[0])
-    n = len(opcodes_X)
 
     for path in paths:
         opcodes_Y = exact_function(path)
-        matches = compare_opcode_sequences(opcodes_X, opcodes_Y)
-        m = len(opcodes_Y)
-        score = calculate_similarity(matches, n, m, 1)
-        plot_opcode_matrix(matches, n, m,
-                           score,
-                           title=f'Opcode Matches Matrix for keylogger',
-                           x_lab="base version",
-                           y_lab=f"version {path.split(split_char)[-1].split('.')[0]}")
+        score, graph = calculate_similarity(opcodes_X, opcodes_Y)
+        # plot_similarity_matrix(graph, opcodes_X, opcodes_Y)
+        # plot_opcode_matrix(matches, n, m,
+        #                    score,
+        #                    title=f'Opcode Matches Matrix for keylogger',
+        #                    x_lab="base version",
+        #                    y_lab=f"version {path.split(split_char)[-1].split('.')[0]}")
         print(f"{path}: {score:.4f}")
 
     # main(paths)

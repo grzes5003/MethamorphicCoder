@@ -1,0 +1,11 @@
+keylogger.exe: 1100.3827
+keylogger3.exe: 1069.7550
+keylogger4.exe: 1087.0861
+keylogger6.exe: 1100.3827
+keylogger7.exe: 1100.3827
+
+keylogger.exe: 0.8298
+keylogger3.exe: 0.8297
+keylogger4.exe: 0.8298
+keylogger6.exe: 0.8298
+keylogger7.exe: 0.8298

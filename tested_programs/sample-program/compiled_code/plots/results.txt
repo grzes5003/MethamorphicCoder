@@ -1,0 +1,13 @@
+sample_program: 6.4704
+sample_program2: 6.1785
+sample_program3: 6.5276
+sample_program4: 6.6300
+sample_program6: 6.4704
+sample_program7: 6.4704
+
+sample_program: 0.9408
+sample_program2: 0.9095
+sample_program3: 0.9099
+sample_program4: 0.9229
+sample_program6: 0.9408
+sample_program7: 0.9408
