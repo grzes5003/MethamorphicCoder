@@ -1,0 +1,10 @@
+
+
+[programs]
+1 = {q_sort, q_sort.c}
+2 = {q_sort2, q_sort2.c}
+3 = {q_sort3, q_sort3.c}
+4 = {q_sort4, q_sort4.c}
+5 = {q_sort5, q_sort5.c}
+
+6 = {q_sort6, metame}
