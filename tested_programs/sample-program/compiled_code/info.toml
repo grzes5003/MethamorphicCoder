@@ -1,0 +1,7 @@
+
+
+[programs]
+1 = {sample_program, sample_program.c}
+2 = {sample_program2, obf_code.c}
+3 = {sample_program3, obf_code2.c}
+4 = {sample_program4, obf_code3.c}
