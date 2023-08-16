@@ -1,0 +1,9 @@
+q_sort: 6.8750
+q_sort2: 6.9845
+q_sort3: 2.6639
+q_sort4: 6.8594
+q_sort5: 6.9845
+q_sort6: 6.8750
+q_sort7: 6.8750
+
+source: https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=D7A54E440D6704315E3ECCE833DC4194?doi=10.1.1.91.4418&rep=rep1&type=pdf

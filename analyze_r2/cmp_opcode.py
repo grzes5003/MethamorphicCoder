@@ -8,7 +8,6 @@ import numpy as np
 import capstone
 import r2pipe
 
-
 PATH_ROOT = pathlib.Path(__file__).parent.parent.resolve()
 
 
@@ -80,10 +79,12 @@ def extract_opcodes_from_binary(binary_file):
 def list_all_matching_files(file_path: str) -> list:
     dir = pathlib.Path(file_path).parent.resolve()
     print(dir)
-    return [str(dir / path) for path in os.listdir(str(dir)) if '.' not in path]
+    return [str(dir / path) for path in os.listdir(str(dir)) if '.' not in path and 'plots' not in path]
 
 
-def plot_opcode_matrix(matches, n, m):
+def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Matches Matrix',
+                       x_lab: str = "Program Y Opcode Number",
+                       y_lab: str = "Program X Opcode Number"):
     matrix = np.zeros((n, m))
 
     for x, y_list in matches.items():
@@ -92,10 +93,14 @@ def plot_opcode_matrix(matches, n, m):
 
     plt.figure(figsize=(10, 8))  # Set the figure size (adjust as needed)
     plt.imshow(matrix, cmap='gray', interpolation='none', aspect='auto', origin='lower')
-    plt.xlabel("Program Y Opcode Number")
-    plt.ylabel("Program X Opcode Number")
-    plt.title("Opcode Matches Matrix")
+    plt.xlabel(x_lab)
+    plt.ylabel(y_lab)
+    plt.title(title)
     plt.colorbar()
+
+    plt.text(0.5, -0.1, f"Similarity Score: {similarity_score:.2f}",
+             horizontalalignment='center', verticalalignment='center', transform=plt.gca().transAxes)
+
     plt.show()
 
 
@@ -110,12 +115,16 @@ if __name__ == "__main__":
     opcodes_X = extract_opcodes_from_binary(paths[0])
     n = len(opcodes_X)
 
-    for path in paths[1:2]:
+    for path in paths:
         opcodes_Y = extract_opcodes_from_binary(path)
         matches = compare_opcode_sequences(opcodes_X, opcodes_Y)
         m = len(opcodes_Y)
-
-        plot_opcode_matrix(matches, n, m)
-        print(f"{path}: {calculate_similarity(matches, n, m, 2):.4f}")
+        score = calculate_similarity(matches, n, m, 1)
+        plot_opcode_matrix(matches, n, m,
+                           score,
+                           title=f'Opcode Matches Matrix for quicksort',
+                           x_lab="base version",
+                           y_lab=f"version {path.split('/')[-1].split('.')[0]}")
+        print(f"{path}: {score:.4f}")
 
     # main(paths)
