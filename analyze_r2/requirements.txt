@@ -1,1 +1,9 @@
 r2pipe
+networkx
+pydot
+graphviz
+numpy
+scipy
+keystone-engine
+capstone
+matplotlib
