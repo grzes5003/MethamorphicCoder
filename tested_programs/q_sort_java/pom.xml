@@ -13,5 +13,9 @@
         <module>q_sort3</module>
         <module>q_sort4</module>
         <module>q_sort5</module>
+        <module>gq_sort2</module>
+        <module>gq_sort3</module>
+        <module>gq_sort4</module>
+        <module>gq_sort5</module>
     </modules>
 </project>
