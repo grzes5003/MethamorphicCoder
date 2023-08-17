@@ -74,8 +74,8 @@ def plot_opcode_matrix(matches, n, m, title: str = 'Opcode Matches Matrix',
 
     plt.figure(figsize=(10, 8))  # Set the figure size (adjust as needed)
     plt.imshow(matrix, cmap='gray', interpolation='none', aspect='auto', origin='lower')
-    plt.xlabel(x_lab)
-    plt.ylabel(y_lab)
+    plt.xlabel(y_lab)
+    plt.ylabel(x_lab)
     plt.title(title)
     plt.colorbar()
 
@@ -90,20 +90,18 @@ if __name__ == "__main__":
 
     # Specify the bytecode filename and class name
     bytecode_filename = PATH_ROOT / args.input_file
-    bytecode_filename2 = PATH_ROOT / args.input_file2
     class_name = "org.example.Main"
-
     instructions = extract_instructions(bytecode_filename, class_name)
-    instructions2 = extract_instructions(bytecode_filename2, class_name)
 
-    matches = compare_opcode_sequences(instructions, instructions2)
+    for i in range(2, 6):
+        bytecode_filename2 = str(PATH_ROOT / args.input_file2).replace("2", str(i))
+        program_name = bytecode_filename2.split('\\')[-3]
+        instructions2 = extract_instructions(bytecode_filename2, class_name)
+        matches = compare_opcode_sequences(instructions, instructions2)
+        plot_opcode_matrix(matches, len(instructions), len(instructions2),
+                           title='Opcode Matches Matrix for "Sample program" java version',
+                           x_lab="base version",
+                           y_lab=f"version {program_name}")
 
-    plot_opcode_matrix(matches, len(instructions), len(instructions2),
-                       title='Opcode Matches Matrix for "Quick Sort" java version',
-                       x_lab="base version",
-                       y_lab="version q_sort5")
-
-    print(instructions)
-    print(instructions2)
     # Extract and print the instructions
 

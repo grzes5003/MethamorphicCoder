@@ -2,3 +2,8 @@ q_sort2: 0.21
 q_sort3: 0.20
 q_sort4: 0.19
 q_sort5: 0.20
+
+gq_sort2: 0.20
+gq_sort3: 0.21
+gq_sort4: 0.06
+gq_sort5: 0.13

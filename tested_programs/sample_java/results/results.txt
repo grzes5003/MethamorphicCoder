@@ -3,3 +3,8 @@ sample2: 0.48
 sample3: 0.37
 sample4: 0.25
 sample5: 0.00
+
+g_sample2: 0.38
+g_sample3: 0.38
+g_sample4: 0.00
+g_sample5: 0.00

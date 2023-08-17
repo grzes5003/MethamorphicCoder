@@ -74,6 +74,7 @@ def plot_similarity_matrix(matrix, x_ticks, y_ticks, x_labels = '(Program Y)'):
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
     argparser.add_argument('-i', '--input_file', type=str, help='Path to the input file', required=True)
+    argparser.add_argument('-b', '--input_file2', type=str, help='Path to the input file', required=False)
     args = argparser.parse_args()
 
     # Specify the bytecode filename and class name
@@ -81,8 +82,11 @@ if __name__ == "__main__":
     class_name = "org.example.Main"
     instructions = extract_instructions(bytecode_filename, class_name)
 
+    other_files = bytecode_filename
+    if args.input_file2 is not None:
+        other_files = PATH_ROOT / args.input_file2
     for i in range(2, 6):
-        bytecode_filename2 = str(bytecode_filename).replace("1", str(i))
+        bytecode_filename2 = str(other_files).replace("2", str(i))
         program_name = bytecode_filename2.split('\\')[-3]
         instructions2 = extract_instructions(bytecode_filename2, class_name)
         score, graph = calculate_similarity(instructions, instructions2, threshold=2)
