@@ -6,7 +6,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 
-# import pefile
+import pefile
 
 import capstone
 
@@ -95,7 +95,11 @@ def extract_opcodes_from_binary_windows(binary_file):
 def list_all_matching_files(file_path: str) -> list:
     dir = pathlib.Path(file_path).parent.resolve()
     print(dir)
-    return [str(dir / path) for path in os.listdir(str(dir)) if '.dot' not in path and 'plots' not in path and 'toml' not in path]
+    return [str(dir / path) for path in os.listdir(str(dir))
+            if '.dot' not in path
+            and 'plots' not in path
+            and 'toml' not in path
+            and 'csv' not in path]
 
 
 def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Matches Matrix',
@@ -114,8 +118,8 @@ def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Mat
     plt.title(title)
     plt.colorbar()
 
-    plt.text(0.5, -0.1, f"Similarity Score: {similarity_score:.2f}",
-             horizontalalignment='center', verticalalignment='center', transform=plt.gca().transAxes)
+    # plt.text(0.5, -0.1, f"Similarity Score: {similarity_score:.2f}",
+    #          horizontalalignment='center', verticalalignment='center', transform=plt.gca().transAxes)
 
     plt.show()
 
