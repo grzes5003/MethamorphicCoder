@@ -15,4 +15,8 @@ q_sort5: 0.9377
 q_sort6: 0.9167
 q_sort7: 0.9167
 
+gsample_program2: 0.9240
+gsample_program3: 0.8411
+gsample_program5: 0.9061
+
 source: https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=D7A54E440D6704315E3ECCE833DC4194?doi=10.1.1.91.4418&rep=rep1&type=pdf

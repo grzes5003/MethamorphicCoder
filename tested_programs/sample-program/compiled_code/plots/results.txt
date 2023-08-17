@@ -11,3 +11,7 @@ sample_program3: 0.9099
 sample_program4: 0.9229
 sample_program6: 0.9408
 sample_program7: 0.9408
+
+gsample_program2: 0.9240
+gsample_program3: 0.8411
+gsample_program5: 0.9061

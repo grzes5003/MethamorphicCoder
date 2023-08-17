@@ -6,7 +6,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 
-import pefile
+# import pefile
 
 import capstone
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     for path in paths:
         opcodes_Y = exact_function(path)
         score, graph = calculate_similarity(opcodes_X, opcodes_Y)
-        # plot_similarity_matrix(graph, opcodes_X, opcodes_Y)
+        plot_similarity_matrix(graph, opcodes_X, opcodes_Y)
         # plot_opcode_matrix(matches, n, m,
         #                    score,
         #                    title=f'Opcode Matches Matrix for keylogger',

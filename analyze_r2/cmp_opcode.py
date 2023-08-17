@@ -6,7 +6,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 
-import pefile
+# import pefile
 
 import capstone
 
@@ -113,8 +113,8 @@ def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Mat
 
     plt.figure(figsize=(10, 8))  # Set the figure size (adjust as needed)
     plt.imshow(matrix, cmap='gray', interpolation='none', aspect='auto', origin='lower')
-    plt.xlabel(x_lab)
-    plt.ylabel(y_lab)
+    plt.xlabel(y_lab)
+    plt.ylabel(x_lab)
     plt.title(title)
     plt.colorbar()
 
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         score = calculate_similarity(matches, n, m, 1)
         plot_opcode_matrix(matches, n, m,
                            score,
-                           title=f'Opcode Matches Matrix for keylogger',
+                           title=f'Opcode Similarity Matrix',
                            x_lab="base version",
                            y_lab=f"version {path.split(split_char)[-1].split('.')[0]}")
         print(f"{path}: {score:.4f}")
