@@ -5,12 +5,12 @@
 #define MANGLE_PROJECT_NAME(x, y) ((x)^(y))
 #define DEMANGLE_PROJECT_NAME(x, y) MANGLE_PROJECT_NAME(x, y)
 
-char project_name = STR_PROJECT_NAME;
+char project_name[] = STR_PROJECT_NAME;
 int mangle_key = 0x55;
 
 typedef struct {
-    char(get_name)(void);
-    int (check_argc)(int, char );
+    char(*get_name)(void);
+    int (*check_argc)(int, char );
 } Project;
 
 char *get_project_name(void) {
@@ -19,7 +19,7 @@ char *get_project_name(void) {
     return project_name;
 }
 
-int check_argc(int argc, char argv) {
+int check_argc(int argc, char *argv[]) {
     if(argc != 1) {
         for (int i = 0; i < strlen(argv[0]); i++)
             argv[0][i] ^= mangle_key;
