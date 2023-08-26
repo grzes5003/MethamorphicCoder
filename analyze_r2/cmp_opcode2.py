@@ -6,7 +6,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 
-# import pefile
+import pefile
 
 import capstone
 
@@ -91,7 +91,7 @@ def list_all_matching_files(file_path: str) -> list:
     dir = pathlib.Path(file_path).parent.resolve()
     print(dir)
     return [str(dir / path) for path in os.listdir(str(dir))
-            if '.dot' not in path and 'plots' not in path and 'toml' not in path and 'csv' not in path]
+            if '.dot' not in path and 'plots' not in path and 'toml' not in path and 'csv' not in path and 'txt' not in path]
 
 
 def plot_opcode_matrix(matches, n, m, similarity_score, title: str = 'Opcode Matches Matrix',

@@ -37,7 +37,7 @@ LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
 
 void setHook() {
 	if (!(keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, NULL, 0))) {
-		MessageBox(NULL, L"Failed to install hook!", L"Error", MB_ICONERROR);
+		MessageBox(NULL, reinterpret_cast<LPCSTR>(L"Failed to install hook!"), reinterpret_cast<LPCSTR>(L"Error"), MB_ICONERROR);
 	}
 }
 

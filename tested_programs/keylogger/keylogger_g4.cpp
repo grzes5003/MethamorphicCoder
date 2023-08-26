@@ -5,6 +5,8 @@
 #include <sstream>
 #include <time.h>
 #include <deque>
+#include <map>
+#include <iostream>
 
 #define hide // (hide / show)
 #define FORMAT 0

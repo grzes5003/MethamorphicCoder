@@ -9,3 +9,8 @@ keylogger3.exe: 0.8297
 keylogger4.exe: 0.8298
 keylogger6.exe: 0.8298
 keylogger7.exe: 0.8298
+
+keylogger_g2.exe: 0.8300
+keylogger_g3.exe: 0.8298
+keylogger_g4.exe: 0.8301
+keylogger_g5.exe: 0.8295
